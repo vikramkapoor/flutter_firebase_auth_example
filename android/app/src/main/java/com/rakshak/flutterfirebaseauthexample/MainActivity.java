@@ -1,4 +1,4 @@
-package com.example.flutterfirebaseauthexample;
+package com.rakshak.flutterfirebaseauthexample;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
