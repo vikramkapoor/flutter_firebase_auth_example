@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "995372369195",
+    "firebase_url": "https://rakshak-b1b11.firebaseio.com",
+    "project_id": "rakshak-b1b11",
+    "storage_bucket": "rakshak-b1b11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995372369195:android:ba32bac46373610f",
+        "android_client_info": {
+          "package_name": "com.rakshak.flutterfirebaseauthexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995372369195-ui9tsr5bks3p69f2b7nkp5hl9m5u55mm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoWsIGkjhtZrE6BjfrG9kPH8wrKc8-Y8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995372369195-ui9tsr5bks3p69f2b7nkp5hl9m5u55mm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "995372369195-qbup190k22l6g626g788ameed1goev3u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rakshak.safeho"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995372369195:android:16ac5ae3488e39bd",
+        "android_client_info": {
+          "package_name": "com.rakshak.safeho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995372369195-ui9tsr5bks3p69f2b7nkp5hl9m5u55mm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoWsIGkjhtZrE6BjfrG9kPH8wrKc8-Y8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995372369195-ui9tsr5bks3p69f2b7nkp5hl9m5u55mm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "995372369195-qbup190k22l6g626g788ameed1goev3u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rakshak.safeho"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

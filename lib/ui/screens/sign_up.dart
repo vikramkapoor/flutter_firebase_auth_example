@@ -13,6 +13,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _code = new TextEditingController();
   final TextEditingController _firstName = new TextEditingController();
   final TextEditingController _lastName = new TextEditingController();
   final TextEditingController _email = new TextEditingController();
@@ -39,6 +40,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 120.0,
             ),
           )),
+    );
+    
+    final code = TextFormField(
+      keyboardType: TextInputType.number,
+      autofocus: false,
+      controller: _code,
+      validator: Validator.validateNumber,
+      decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.only(left: 5.0),
+          child: Icon(
+            Icons.hotel,
+            color: Colors.grey,
+          ), // icon is 48px widget.
+        ), // icon is 48px widget.
+        hintText: 'Hotel Code',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+      ),
     );
 
     final firstName = TextFormField(
@@ -129,6 +149,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               lastName: _lastName.text,
               email: _email.text,
               password: _password.text,
+              code: _code.text,
               context: context);
         },
         padding: EdgeInsets.all(12),
@@ -163,6 +184,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: <Widget>[
                       logo,
                       SizedBox(height: 48.0),
+                      code,
+                      SizedBox(height: 24.0),
                       firstName,
                       SizedBox(height: 24.0),
                       lastName,
@@ -194,6 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String lastName,
       String email,
       String password,
+      String code,
       BuildContext context}) async {
     if (_formKey.currentState.validate()) {
       try {
@@ -206,6 +230,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             email: email,
             firstName: firstName,
             lastName: lastName,
+            code: code,
           ));
         });
         //now automatically login user too

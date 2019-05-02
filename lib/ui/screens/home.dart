@@ -93,11 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
       final email = appState?.firebaseUserAuth?.email ?? '';
       final firstName = appState?.user?.firstName ?? '';
       final lastName = appState?.user?.lastName ?? '';
+      final code = appState?.user?.code ?? '';
       final settingsId = appState?.settings?.settingsId ?? '';
       final userIdLabel = Text('App Id: ');
       final emailLabel = Text('Email: ');
       final firstNameLabel = Text('First Name: ');
       final lastNameLabel = Text('Last Name: ');
+      final codeLabel = Text('Hotel code:');
       final settingsIdLabel = Text('SetttingsId: ');
 
       return Scaffold(
@@ -115,6 +117,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(height: 48.0),
                       userIdLabel,
                       Text(userId,
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      SizedBox(height: 12.0),
+                      codeLabel,
+                      Text(code,
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(height: 12.0),
                       emailLabel,
