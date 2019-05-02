@@ -13,7 +13,7 @@ class Validator {
         (value.contains(RegExp(r'\d'), 0)) &&
         (value.contains(new RegExp(r'[A-Z]'), 0)) &&
         (value.isNotEmpty && !value.contains(RegExp(r'^[\w&.-]+$'), 0)));
-    return !isValid ? 'Enter alteast 8 characters, 1 upper case, 1 special and 1 number.' : null;
+    return !isValid ? 'Enter alteast 8 characters, 1 upper case, 1 special\nand 1 number.' : null;
   }
 
   static String validateName(String value) {
