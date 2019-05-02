@@ -230,7 +230,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
                       email,
                       SizedBox(height: 24.0),
                       password,
-                      Padding(padding: const EdgeInsets.all(8.0), child: _validationStack()), 
+                      Padding(padding: const EdgeInsets.all(4.0), child: _validationStack()), 
                       SizedBox(height: 12.0),
                       signUpButton,
                       signInLabel
