@@ -12,7 +12,7 @@ class Validator {
     Pattern pattern =  r'^[\W]*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+[\W]*,{1}[\W]*)*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+)[\W]*$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
-      return 'Please enter a valid comma-seperated email address(es).';
+      return 'Please enter valid comma-seperated email address(es).';
     else
       return null;
   }
