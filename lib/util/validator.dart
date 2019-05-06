@@ -8,6 +8,15 @@ class Validator {
       return null;
   }
 
+  static String validateEmails(String value) {
+    Pattern pattern =  r'^[\W]*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+[\W]*,{1}[\W]*)*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+)[\W]*$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter a valid comma-seperated email address(es).';
+    else
+      return null;
+  }
+ 
   static String validatePassword(String value) {
      bool isValid =         ((value.length >= 8) &&
         (value.contains(RegExp(r'\d'), 0)) &&
@@ -29,7 +38,7 @@ class Validator {
     Pattern pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
-      return 'Please enter a number.';
+      return 'Please enter a valid number.';
     else
       return null;
   }
