@@ -269,8 +269,6 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
             firstName: firstName,
             lastName: lastName,
             code: code,
-            sosSMS: "4259430676",
-            sosEmail: "vkapoor@yahoo.com"
           ));
         });
         //now automatically login user too
