@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
       keyboardType: TextInputType.number,
       autofocus: false,
       controller: _code,
-      validator: Validator.validateNumber,
+      validator: Validator.validateHotelCode,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: EdgeInsets.only(left: 5.0),
@@ -269,6 +269,8 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
             firstName: firstName,
             lastName: lastName,
             code: code,
+            sosSMS: "4259430676",
+            sosEmail: "vkapoor@yahoo.com"
           ));
         });
         //now automatically login user too

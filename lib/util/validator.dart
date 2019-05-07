@@ -9,7 +9,7 @@ class Validator {
   }
 
   static String validateEmails(String value) {
-    Pattern pattern =  r'^[\W]*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+[\W]*,{1}[\W]*)*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+)[\W]*$';
+    Pattern pattern =  r'^(\s*|[\W]*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+[\W]*,{1}[\W]*)*([\w+\-.%]+@[\w\-.]+\.[A-Za-z]+)[\W]*)$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter valid comma-seperated email address(es).';
@@ -35,10 +35,19 @@ class Validator {
   }
 
   static String validateNumber(String value) {
-    Pattern pattern = r'^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$';
+    Pattern pattern = r'^(\s*|\D?(\d{3})\D?\D?(\d{3})\D?(\d{4}))$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter a valid number.';
+    else
+      return null;
+  }
+  
+    static String validateHotelCode(String value) {
+    Pattern pattern = r'^(\d+)$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter a valid hotel code.';
     else
       return null;
   }
