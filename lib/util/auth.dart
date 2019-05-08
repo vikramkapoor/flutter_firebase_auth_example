@@ -150,12 +150,15 @@ class Auth {
           break;
         case 'The email address is already in use by another account.':
           return 'This email address already has an account.';
-          break;
+          break;   
+        case 'Invalid hotel code.':
+          return 'Invalid hotel code.';
+          break;  
         default:
           return 'Unknown error occured.';
       }
     } else {
-      return 'Unknown error occured.';
+        return 'Unknown error occured.';
     }
   }
 

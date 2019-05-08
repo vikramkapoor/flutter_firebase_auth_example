@@ -7,6 +7,8 @@ import 'package:flutter_firebase_auth_example/models/user.dart';
 import 'package:flutter_firebase_auth_example/util/auth.dart';
 import 'package:flutter_firebase_auth_example/util/validator.dart';
 import 'package:flutter_firebase_auth_example/ui/widgets/loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:safeho/hotel.dart';
 
 class SignUpScreen extends StatefulWidget {
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -250,6 +252,29 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
     });
   }
 
+  Future<bool> _validateHotelCode(String code) async {
+    Hotel hotel;
+    String hotelId = code.split("-")[0];
+    String roleCode = code.split("-")[1];
+    if (code != null) {
+        hotel =  await Firestore.instance
+          .collection('Hotels')
+          .where("HotelID",isEqualTo:hotelId)
+          .getDocuments()
+          .then((querySnapshot) => (querySnapshot.documents.isNotEmpty)? Hotel.fromSnapshot(querySnapshot.documents[0]):null);
+    }
+    else {
+      return false;
+      print('Hotel code can not be null');
+    }
+    if (hotel != null) {
+      if ((roleCode == hotel.adminCode) || (roleCode == hotel.managerCode) || (roleCode == hotel.workerCode))
+      return true;
+    }
+    else 
+      return false;
+  }
+
   void _emailSignUp(
       {String firstName,
       String lastName,
@@ -262,7 +287,12 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
         SystemChannels.textInput.invokeMethod('TextInput.hide');
         await _changeLoadingVisible();
         //need await so it has chance to go through error if found.
-        await Auth.signUp(email, password).then((uID) {
+        await _validateHotelCode(code).then((boValid) {
+        if (!boValid) {
+          throw new PlatformException(code:"ErrorCode", message:"Invalid hotel code.");
+        }
+        });
+       await Auth.signUp(email, password).then((uID) {
           Auth.addUserSettingsDB(new User(
             userId: uID,
             email: email,
@@ -273,20 +303,21 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
         });
         //now automatically login user too
         //await StateWidget.of(context).logInUser(email, password);  
-/*      Flushbar(
-          title: "Account successfully created",
+       await Navigator.pushNamed(context, '/signin');   
+       /*
+       Flushbar(
+          title: "Sign up successful",
           message:
-              'You can now sign into your new account.',
+              'You can now sign into your account.',
           duration: Duration(seconds: 5),
         )..show(context);    
         */
-        await Navigator.pushNamed(context, '/signin');   
       } catch (e) {
         _changeLoadingVisible();
-        print("Sign Up Error: $e");
+        print("Sign up error: $e");
         String exception = Auth.getExceptionText(e);
         Flushbar(
-          title: "Sign Up Error",
+          title: "Sign up error",
           message: exception,
           duration: Duration(seconds: 5),
         )..show(context);
