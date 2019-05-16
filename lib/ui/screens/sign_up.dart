@@ -9,6 +9,7 @@ import 'package:flutter_firebase_auth_example/util/validator.dart';
 import 'package:flutter_firebase_auth_example/ui/widgets/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:safeho/hotel.dart';
+import 'package:safeho/globals.dart';
 
 class SignUpScreen extends StatefulWidget {
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -33,6 +34,9 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
 
   bool _autoValidate = false;
   bool _loadingVisible = false;
+  int role;
+  String hotelId;
+
   @override
   void initState() {
     super.initState();
@@ -254,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
 
   Future<bool> _validateHotelCode(String code) async {
     Hotel hotel;
-    String hotelId = code.split("-")[0];
+    hotelId = code.split("-")[0];
     String roleCode = code.split("-")[1];
     if (code != null) {
         hotel =  await Firestore.instance
@@ -268,8 +272,16 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
       print('Hotel code can not be null');
     }
     if (hotel != null) {
-      if ((roleCode == hotel.adminCode) || (roleCode == hotel.managerCode) || (roleCode == hotel.workerCode))
+      if (roleCode == hotel.adminCode) {
+      role = Role.Admin;
       return true;
+      } else if  (roleCode == hotel.managerCode) {
+      role = Role.Manager;
+      return true;
+      } else if (roleCode == hotel.workerCode) {
+      role = Role.Worker;
+      return true;
+      }
     }
     else 
       return false;
@@ -298,7 +310,8 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
             email: email,
             firstName: firstName,
             lastName: lastName,
-            code: code,
+            hotelId: hotelId,
+            role: role,
           ));
         });
         //now automatically login user too

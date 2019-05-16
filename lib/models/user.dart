@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:safeho/globals.dart';
 
 // To parse this JSON data, do
 //
@@ -20,14 +21,16 @@ class User {
   String firstName;
   String lastName;
   String email;
-  String code;
+  String hotelId;
+  int role;
 
   User({
     this.userId,
     this.firstName,
     this.lastName,
     this.email,
-    this.code,
+    this.hotelId,
+    this.role,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => new User(
@@ -35,7 +38,8 @@ class User {
         firstName: json["firstName"],
         lastName: json["lastName"],
         email: json["email"],
-        code: json["code"],
+        hotelId: json["hotelId"],
+        role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,7 +47,8 @@ class User {
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
-        "code": code,
+        "hotelId": hotelId,
+        "role": role,
       };
 
   factory User.fromDocument(DocumentSnapshot doc) {
