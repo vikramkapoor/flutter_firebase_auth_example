@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
       final email = appState?.firebaseUserAuth?.email ?? '';
       final firstName = appState?.user?.firstName ?? '';
       final lastName = appState?.user?.lastName ?? '';
-      final code = appState?.user?.code ?? '';
+      //final code = appState?.user?.code ?? '';
       final settingsId = appState?.settings?.settingsId ?? '';
       final userIdLabel = Text('App Id: ');
       final emailLabel = Text('Email: ');
@@ -120,8 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(height: 12.0),
                       codeLabel,
-                      Text(code,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+      //                Text(code,
+      //                    style: TextStyle(fontWeight: FontWeight.bold)),
                       SizedBox(height: 12.0),
                       emailLabel,
                       Text(email,
