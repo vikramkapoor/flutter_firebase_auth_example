@@ -29,6 +29,7 @@ ThemeData buildTheme() {
     textTheme: _buildTextTheme(base.textTheme),
     primaryColor: const Color(0xFF2196F3),
     accentColor: const Color(0xFFFFFFFF),
+    splashColor: const Color(0xFF000000),
     iconTheme: IconThemeData(
       color: const Color(0xFFCCCCCC),
       size: 20.0,
