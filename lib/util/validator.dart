@@ -51,4 +51,14 @@ class Validator {
     else
       return null;
   }
+
+    static String validateSeniority(String value) {
+    Pattern pattern = r'^(\d{1})$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter valid seniority (0-9).';
+    else
+      return null;
+  }
+
 }
