@@ -40,7 +40,6 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
-
       textController.addListener(() {
       setState(() {
         eightChars = textController.text.length >= 8;

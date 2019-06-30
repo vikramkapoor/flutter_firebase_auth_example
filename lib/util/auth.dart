@@ -6,6 +6,7 @@ import 'package:flutter_firebase_auth_example/models/user.dart';
 import 'package:flutter_firebase_auth_example/models/settings.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:safeho/guest.dart';
 
 enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 
@@ -30,6 +31,38 @@ class Auth {
         print("user ${user.firstName} ${user.email} exists");
       }
     });
+  }
+
+
+  static void addGuestSettingsDB(Guest guest) async {
+    checkGuestExist(guest.guestId).then((value) {
+      if (!value) {
+        print("guest ${guest.firstName} ${guest.email} added");
+        Firestore.instance
+            .document("Guests/${guest.guestId}")
+            .setData(guest.toJson());
+        _addSettings(new Settings(
+          settingsId: guest.guestId,
+        ));
+      } else {
+        print("user ${guest.firstName} ${guest.email} exists");
+      }
+    });
+  }
+
+  static Future<bool> checkGuestExist(String guestId) async {
+    bool exists = false;
+    try {
+      await Firestore.instance.document("guest/$guestId").get().then((doc) {
+        if (doc.exists)
+          exists = true;
+        else
+          exists = false;
+      });
+      return exists;
+    } catch (e) {
+      return false;
+    }
   }
 
   static Future<bool> checkUserExist(String userId) async {

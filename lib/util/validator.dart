@@ -53,10 +53,28 @@ class Validator {
   }
 
     static String validateSeniority(String value) {
-    Pattern pattern = r'^(\d{1})$';
+    Pattern pattern = r'^(\s*|\d{1})$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter valid seniority (0-9).';
+    else
+      return null;
+  }
+
+  static String validateRating(String value) {
+    Pattern pattern = r'^([1-5])$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter valid rating (1-5).';
+    else
+      return null;
+  }
+
+  static String validatePoints(String value) {
+    Pattern pattern = r'^([1-9]\d*$)';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter valid points (1-1000000).';
     else
       return null;
   }
