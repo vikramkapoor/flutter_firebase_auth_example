@@ -22,7 +22,7 @@ class User {
   String email;
   String hotelId;
   int role;
-  String seniority;
+  int seniority;
   bool shiftSunAM;
   bool shiftSunPM;
   bool shiftMonAM;
@@ -69,7 +69,7 @@ class User {
         email: json["email"],
         hotelId: json["hotelId"],
         role: json["role"],
-        seniority: json["seniority"],
+        seniority:  json["seniority"],
         shiftSunAM: json["shiftSunAM"],
         shiftSunPM: json["shiftSunPM"],
         shiftMonAM: json["shiftMonAM"],
