@@ -21,8 +21,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   shared_preferences: any
   firebase_auth: #^0.8.1
-  firebase_core: ^0.3.0
-  cloud_firestore: ^0.9.0+1
+  firebase_core: #^0.4.0
+  cloud_firestore: #^0.9.0+1
   flushbar: #^1.3.1
 
 
