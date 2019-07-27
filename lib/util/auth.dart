@@ -33,6 +33,12 @@ class Auth {
     });
   }
 
+  static void updateUserSettingsDB(User user) async {
+        print("user ${user.firstName} ${user.email} updated");
+        Firestore.instance
+            .document("users/${user.userId}")
+            .updateData(user.toJson());
+  }
 
   static void addGuestSettingsDB(Guest guest) async {
     checkGuestExist(guest.guestId).then((value) {

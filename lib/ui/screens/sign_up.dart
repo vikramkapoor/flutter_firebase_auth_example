@@ -22,7 +22,6 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
   final TextEditingController _lastName = new TextEditingController();
   final TextEditingController _email = new TextEditingController();
   final TextEditingController _password = new TextEditingController();
-  
   TextEditingController textController = TextEditingController();
   AnimationController _controller;
   Animation<double> _fabScale;
@@ -84,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
             ),
           )),
     );
-    
+    /*
     final code = TextFormField(
       keyboardType: TextInputType.number,
       autofocus: false,
@@ -103,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
-
+*/
     final firstName = TextFormField(
       autofocus: false,
       textCapitalization: TextCapitalization.words,
@@ -226,8 +225,8 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
                     children: <Widget>[
                       logo,
                       SizedBox(height: 48.0),
-                      code,
-                      SizedBox(height: 24.0),
+                      /*code,
+                      SizedBox(height: 24.0),*/
                       firstName,
                       SizedBox(height: 24.0),
                       lastName,
@@ -254,7 +253,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
       _loadingVisible = !_loadingVisible;
     });
   }
-
+/*
   Future<bool> _validateHotelCode(String code) async {
     Hotel hotel;
     hotelId = code.split("-")[0];
@@ -285,7 +284,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
     else 
       return false;
   }
-
+*/
   void _emailSignUp(
       {String firstName,
       String lastName,
@@ -298,19 +297,17 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
         SystemChannels.textInput.invokeMethod('TextInput.hide');
         await _changeLoadingVisible();
         //need await so it has chance to go through error if found.
-        await _validateHotelCode(code).then((boValid) {
+       /* await _validateHotelCode(code).then((boValid) {
         if (!boValid) {
           throw new PlatformException(code:"ErrorCode", message:"Invalid hotel code.");
         }
-        });
+        });*/
        await Auth.signUp(email, password).then((uID) {
           Auth.addUserSettingsDB(new User(
             userId: uID,
             email: email,
             firstName: firstName,
             lastName: lastName,
-            hotelId: hotelId,
-            role: role,
           ));
         });
         //now automatically login user too
