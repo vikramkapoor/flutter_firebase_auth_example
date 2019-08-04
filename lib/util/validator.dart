@@ -44,7 +44,7 @@ class Validator {
   }
   
     static String validateHotelCode(String value) {
-    Pattern pattern = r'^(\d{6}-\d{4})$';
+    Pattern pattern = r'^([A-Za-z0-9_-]{6}-[A-Za-z0-9_-]{4})$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter a valid hotel code.';
