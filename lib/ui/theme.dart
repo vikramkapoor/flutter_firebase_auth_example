@@ -22,7 +22,7 @@ ThemeData buildTheme() {
   }
 
   // We want to override a default light blue theme.
-  final ThemeData base = ThemeData.light();
+  final ThemeData base = ThemeData.dark();
 
   // And apply changes on it:
   return base.copyWith(
@@ -34,7 +34,7 @@ ThemeData buildTheme() {
       color: const Color(0xFFCCCCCC),
       size: 20.0,
     ),
-    buttonColor: Colors.white,
-    backgroundColor: Colors.white,
+    buttonColor: null,
+    backgroundColor: null,
   );
 }

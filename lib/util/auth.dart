@@ -40,6 +40,7 @@ class Auth {
             .updateData(user.toJson());
   }
 
+
   static void addGuestSettingsDB(Guest guest) async {
     checkGuestExist(guest.guestId).then((value) {
       if (!value) {

@@ -33,7 +33,9 @@ class Validator {
     else
       return null;
   }
-
+  static String validateMiddleName(String value) {
+    return (value.isEmpty)?null:validateName(value);
+  }
   static String validateNumber(String value) {
     Pattern pattern = r'^(\s*|\D?(\d{3})\D?\D?(\d{3})\D?(\d{4}))$';
     RegExp regex = new RegExp(pattern);
@@ -42,9 +44,43 @@ class Validator {
     else
       return null;
   }
-  
+  static String validateDate(String value) {
+    Pattern pattern = r'^(\s*|\D?(\d[1-12])\D?\D?(\d[1-31])\D?(\d{4}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter a valid date (mm/dd/yyyy).';
+    else
+      return null;
+  }
+
+  static String validateYear(String value) {
+    Pattern pattern = r'^(\s*|(\d{4}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter a valid year (yyyy).';
+    else
+      return null;
+  }
+
+  static String validateColor(String value) {
+    Pattern pattern = r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$";
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter a color.';
+    else
+      return null;
+  }
+
+  static String validateVIN(String value) {
+    Pattern pattern = r'^(?:([A-HJ-NPR-Z]){3}|\d{3})(?1){2}\d{2}(?:(?1)|\d)(?:\d|X)(?:(?1)+\d+|\d+(?1)+)\d{6}$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter a valid VIN (17 characters).';
+    else
+      return null;
+  }
     static String validateHotelCode(String value) {
-    Pattern pattern = r'^(\d{6}-\d{4})$';
+    Pattern pattern = r'^([A-Za-z0-9_-]{6}-[A-Za-z0-9_-]{4})$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter a valid hotel code.';

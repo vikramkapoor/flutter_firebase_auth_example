@@ -210,7 +210,6 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: LoadingScreen(
           child: Form(
             key: _formKey,
