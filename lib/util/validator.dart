@@ -37,10 +37,10 @@ class Validator {
     return (value.isEmpty)?null:validateName(value);
   }
   static String validateNumber(String value) {
-    Pattern pattern = r'^(\s*|\D?(\d{3})\D?\D?(\d{3})\D?(\d{4}))$';
+    Pattern pattern = r'^\s*(?:\+?(\d{1,3}))?[- (]*(\d{3})[- )]*(\d{3})[- ]*(\d{4})(?: *[x/#]{1}(\d+))?\s*$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
-      return 'Please enter a valid number.';
+      return 'Please enter a valid phone number.';
     else
       return null;
   }

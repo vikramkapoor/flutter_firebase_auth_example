@@ -76,6 +76,15 @@ class _StateWidgetState extends State<StateWidget> {
     await initUser();
   }
 
+
+  Future<void> setupUser(String userId) async {
+    User user = await Auth.getUserFirestore(userId);
+    await Auth.storeUserLocal(user);
+    Settings settings = await Auth.getSettingsFirestore(user.userId);
+    await Auth.storeSettingsLocal(settings);
+    await initUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new _StateDataWidget(

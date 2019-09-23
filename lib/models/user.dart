@@ -21,6 +21,7 @@ class User {
   String lastName;
   String email;
   String hotelId;
+  String profilePictureURL;
   int role;
   int seniority;
   bool shiftSunAM;
@@ -44,6 +45,7 @@ class User {
     this.lastName,
     this.email,
     this.hotelId,
+    this.profilePictureURL,
     this.role,
     this.seniority,
     this.shiftSunAM,
@@ -68,6 +70,7 @@ class User {
         lastName: json["lastName"],
         email: json["email"],
         hotelId: json["hotelId"],
+        profilePictureURL: json["profilePictureURL"],
         role: json["role"],
         seniority:  json["seniority"],
         shiftSunAM: json["shiftSunAM"],
@@ -92,6 +95,7 @@ class User {
         "lastName": lastName,
         "email": email,
         "hotelId": hotelId,
+        "profilePictureURL": profilePictureURL,
         "role": role,
         "seniority":seniority,
         "shiftSunAM": shiftSunAM,

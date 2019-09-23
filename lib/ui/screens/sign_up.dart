@@ -7,6 +7,7 @@ import 'package:flutter_firebase_auth_example/models/user.dart';
 import 'package:flutter_firebase_auth_example/util/auth.dart';
 import 'package:flutter_firebase_auth_example/util/validator.dart';
 import 'package:flutter_firebase_auth_example/ui/widgets/loading.dart';
+import 'package:flutter_firebase_auth_example/util/state_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:safeho/hotel.dart';
 import 'package:safeho/globals.dart';
@@ -192,7 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
               password: textController.text,
               code: _code.text,
               context: context);
-        },
+        },   
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
         child: Text('SIGN UP', style: TextStyle(color: Colors.white)),
@@ -310,8 +311,9 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
           ));
         });
         //now automatically login user too
-        //await StateWidget.of(context).logInUser(email, password);  
-       await Navigator.pushNamed(context, '/signin');   
+        await StateWidget.of(context).logInUser(email, password);
+        await Navigator.pushNamed(context, '/');
+        //await Navigator.pushNamed(context, '/signin');
        /*
        Flushbar(
           title: "Sign up successful",

@@ -6,14 +6,14 @@ import 'package:flutter_firebase_auth_example/models/user.dart';
 import 'package:flutter_firebase_auth_example/models/settings.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:safeho/guest.dart';
+import 'package:safeho/Guest.dart';
 
 enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 
 class Auth {
   static Future<String> signUp(String email, String password) async {
     FirebaseUser user = (await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password)).user;
+        .createUserWithEmailAndPassword(email: email, password: password));
     return user.uid;
   }
 
@@ -41,26 +41,26 @@ class Auth {
   }
 
 
-  static void addGuestSettingsDB(Guest guest) async {
-    checkGuestExist(guest.guestId).then((value) {
+  static void addCustomerSettingsDB(Customer customer) async {
+    checkCustomerExist(customer.customerId).then((value) {
       if (!value) {
-        print("guest ${guest.firstName} ${guest.email} added");
+        print("customer ${customer.firstName} ${customer.email} added");
         Firestore.instance
-            .document("Guests/${guest.guestId}")
-            .setData(guest.toJson());
+            .document("Customers/${customer.customerId}")
+            .setData(customer.toJson());
         _addSettings(new Settings(
-          settingsId: guest.guestId,
+          settingsId: customer.customerId,
         ));
       } else {
-        print("user ${guest.firstName} ${guest.email} exists");
+        print("user ${customer.firstName} ${customer.email} exists");
       }
     });
   }
 
-  static Future<bool> checkGuestExist(String guestId) async {
+  static Future<bool> checkCustomerExist(String customerId) async {
     bool exists = false;
     try {
-      await Firestore.instance.document("guest/$guestId").get().then((doc) {
+      await Firestore.instance.document("customer/$customerId").get().then((doc) {
         if (doc.exists)
           exists = true;
         else
@@ -95,7 +95,20 @@ class Auth {
 
   static Future<String> signIn(String email, String password) async {
     FirebaseUser user = (await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password)).user;
+        .signInWithEmailAndPassword(email: email, password: password));
+    return user.uid;
+  }
+
+  static Future<String> signInWithFacebok(String accessToken) async {
+    
+ ///assuming sucess in FacebookLoginStatus.loggedIn
+/// we use FacebookAuthProvider class to get a credential from accessToken
+/// this will return an AuthCredential object that we will use to auth in firebase
+ AuthCredential credential= FacebookAuthProvider.getCredential(accessToken: accessToken);
+
+// this line do auth in firebase with your facebook credential.
+FirebaseUser user = await FirebaseAuth.instance.signInWithCredential(credential);
+
     return user.uid;
   }
 
