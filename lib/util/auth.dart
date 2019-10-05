@@ -6,7 +6,7 @@ import 'package:flutter_firebase_auth_example/models/user.dart';
 import 'package:flutter_firebase_auth_example/models/settings.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:safeho/Guest.dart';
+import 'package:safeho/Customer.dart';
 
 enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 

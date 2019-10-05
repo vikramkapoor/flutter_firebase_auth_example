@@ -33,6 +33,14 @@ class Validator {
     else
       return null;
   }
+
+  static String validateTitle(String value) {
+ if (value.isEmpty)
+      return 'Title cannot be empty.';
+    else
+      return null;
+  }
+
   static String validateMiddleName(String value) {
     return (value.isEmpty)?null:validateName(value);
   }
