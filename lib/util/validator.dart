@@ -88,7 +88,7 @@ class Validator {
       return null;
   }
     static String validateHotelCode(String value) {
-    Pattern pattern = r'^([A-Za-z0-9_-]{6}-[A-Za-z0-9_-]{4})$';
+    Pattern pattern = r'^([A-Za-z0-9_-]{6}-[A-Za-z0-9_-]{4,6})$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter a valid hotel code.';
@@ -119,6 +119,15 @@ class Validator {
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter valid points (1-1000000).';
+    else
+      return null;
+  }
+
+  static String validateDouble(String value) {
+    Pattern pattern = r'^([1-9]\d*(\.\d+)?$)';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value))
+      return 'Please enter number.';
     else
       return null;
   }
