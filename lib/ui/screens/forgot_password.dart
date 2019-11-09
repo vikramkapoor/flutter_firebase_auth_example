@@ -74,7 +74,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     final signInLabel = FlatButton(
       child: Text(
         'Sign In',
-        style: TextStyle(color: Colors.black54),
+        //style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
         Navigator.pushNamed(context, '/signin');

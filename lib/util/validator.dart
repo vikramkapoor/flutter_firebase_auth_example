@@ -124,7 +124,7 @@ class Validator {
   }
 
   static String validateDouble(String value) {
-    Pattern pattern = r'^([1-9]\d*(\.\d+)?$)';
+    Pattern pattern = r'^([0-9]\d*(\.\d+)?$)';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value))
       return 'Please enter number.';
