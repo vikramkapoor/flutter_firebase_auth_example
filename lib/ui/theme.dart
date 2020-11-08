@@ -22,7 +22,7 @@ ThemeData buildTheme() {
   }
 
   // We want to override a default light blue theme.
-  final ThemeData base = ThemeData.dark();
+  final ThemeData base = ThemeData.light();
 
   // And apply changes on it:
   return base.copyWith(

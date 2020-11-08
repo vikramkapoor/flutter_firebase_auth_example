@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=C:\src\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\v-vikkap\Documents\GitHub\flutter_firebase_auth_example"
+export "FLUTTER_APPLICATION_PATH=C:\Users\v-vikkap\Documents\GitHub\flutter_firebase_auth_brainframe"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build\ios"

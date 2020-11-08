@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_firebase_auth_example/util/state_widget.dart';
-import 'package:flutter_firebase_auth_example/util/auth.dart';
-import 'package:flutter_firebase_auth_example/util/validator.dart';
-import 'package:flutter_firebase_auth_example/ui/widgets/loading.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:flutter_firebase_auth_example/models/user.dart';
+import 'package:flutter_firebase_auth_brainframe/util/state_widget.dart';
+import 'package:flutter_firebase_auth_brainframe/util/auth.dart';
+import 'package:flutter_firebase_auth_brainframe/util/validator.dart';
+import 'package:flutter_firebase_auth_brainframe/ui/widgets/loading.dart';
 
-
+Widget headerImage = Column( children: <Widget> [Text("BrainFrame", style: TextStyle(fontSize: 20.0),), Image.asset(
+  'assets/images/default.png',
+  fit: BoxFit.scaleDown,
+  width: 120.0,
+  height: 120.0,
+),]);
 class SignInScreen extends StatefulWidget {
   _SignInScreenState createState() => _SignInScreenState();
 }
@@ -30,18 +33,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'hero',
-      child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 60.0,
-          child: ClipOval(
-            child: Image.asset(
-              'assets/images/default.png',
-              fit: BoxFit.cover,
-              width: 120.0,
-              height: 120.0,
-            ),
-          )),
-    );
+      child: headerImage);
 
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
@@ -93,22 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
         },
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
-        child: Text('SIGN IN', style: TextStyle(color: Colors.white)),
-      ),
-    );
-
-    final facebookLoginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        onPressed: (isLoggedIn)?null:() => initiateFacebookLogin(),
-        padding: EdgeInsets.all(12),
-        color: Colors.indigo, //3B5998 is the facebook color
-        child:   (isLoggedIn)?Text("Signed in with Facebook"):Text("Continue with Facebook", style: TextStyle(color: Colors.white)),
-        textColor: Colors.white,
-        splashColor: Colors.black12,
+        child: Text('SIGN IN'),
       ),
     );
 
@@ -146,13 +123,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       logo,
-                      SizedBox(height: 48.0),
                       email,
                       SizedBox(height: 24.0),
                       password,
                       SizedBox(height: 12.0),
                       loginButton,
-                      facebookLoginButton,
                       forgotLabel,
                       signUpLabel
                     ],
@@ -176,44 +151,6 @@ void onLoginStatusChanged(bool isLoggedIn) {
       this.isLoggedIn = isLoggedIn;
     });
 }
-
-void initiateFacebookLogin() async {
-  _changeLoadingVisible();
-    var facebookLogin = FacebookLogin();
-    var facebookLoginResult =
-        await facebookLogin.logInWithReadPermissions(['email', 'public_profile']);
-     switch (facebookLoginResult.status) {
-      case FacebookLoginStatus.error:
-        print("Error");
-        _changeLoadingVisible();
-        onLoginStatusChanged(false);
-        break;
-      case FacebookLoginStatus.cancelledByUser:
-        print("CancelledByUser");
-        _changeLoadingVisible();
-        onLoginStatusChanged(false);
-        break;
-      case FacebookLoginStatus.loggedIn:
-        print("LoggedIn");
-        onLoginStatusChanged(true);
-                  Auth.signInWithFacebok(facebookLoginResult.accessToken.token).then((uid) {
-            Auth.getCurrentFirebaseUser().then((firebaseUser) {
-              User user = new User(
-                firstName: firebaseUser.displayName.split(" ")[0],
-                lastName: firebaseUser.displayName.split(" ")[1],
-                userId: firebaseUser.uid,
-                email: firebaseUser.email ?? '',
-                profilePictureURL: firebaseUser.photoUrl ?? '',
-              );
-              Auth.addUserSettingsDB(user);
-              StateWidget.of(context).setupUser(firebaseUser.uid).then((onValue) {
-                _changeLoadingVisible();
-                Navigator.pushNamed(context, '/');});
-            });
-          });
-        break;
-    }
-  }
 
   void _emailLogin(
       {String email, String password, BuildContext context}) async {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_firebase_auth_brainframe/ui/screens/sign_in.dart';
 
-import 'package:flutter_firebase_auth_example/util/auth.dart';
-import 'package:flutter_firebase_auth_example/util/validator.dart';
-import 'package:flutter_firebase_auth_example/ui/widgets/loading.dart';
+import 'package:flutter_firebase_auth_brainframe/util/auth.dart';
+import 'package:flutter_firebase_auth_brainframe/util/validator.dart';
+import 'package:flutter_firebase_auth_brainframe/ui/widgets/loading.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
@@ -24,17 +25,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'hero',
-      child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 60.0,
-          child: ClipOval(
-            child: Image.asset(
-              'assets/images/default.png',
-              fit: BoxFit.cover,
-              width: 120.0,
-              height: 120.0,
-            ),
-          )),
+      child: headerImage,
     );
 
     final email = TextFormField(
