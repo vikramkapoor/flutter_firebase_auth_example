@@ -203,7 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
     final signInLabel = FlatButton(
       child: Text(
         'Have an Account? Sign In.',
-        //style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
         Navigator.pushNamed(context, '/signin');

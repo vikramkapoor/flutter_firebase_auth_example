@@ -115,7 +115,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final forgotLabel = FlatButton(
       child: Text(
         'Forgot password?',
-       // style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
         Navigator.pushNamed(context, '/forgot-password');
@@ -125,7 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final signUpLabel = FlatButton(
       child: Text(
         'Create an Account',
-     //   style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
         Navigator.pushNamed(context, '/signup');
