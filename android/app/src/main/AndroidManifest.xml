@@ -14,7 +14,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="flutter_firebase_auth_example"
+        android:label="flutter_firebase_auth_brainframe"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

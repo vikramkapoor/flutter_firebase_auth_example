@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_firebase_auth_brainframe/ui/screens/sign_in.dart';
 import 'dart:math' as math;
 import './validation_item.dart';
-import 'package:flutter_firebase_auth_example/models/user.dart';
-import 'package:flutter_firebase_auth_example/util/auth.dart';
-import 'package:flutter_firebase_auth_example/util/validator.dart';
-import 'package:flutter_firebase_auth_example/ui/widgets/loading.dart';
-import 'package:flutter_firebase_auth_example/util/state_widget.dart';
+import 'package:flutter_firebase_auth_brainframe/models/user.dart';
+import 'package:flutter_firebase_auth_brainframe/util/auth.dart';
+import 'package:flutter_firebase_auth_brainframe/util/validator.dart';
+import 'package:flutter_firebase_auth_brainframe/ui/widgets/loading.dart';
+import 'package:flutter_firebase_auth_brainframe/util/state_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:safeho/hotel.dart';
-import 'package:safeho/globals.dart';
 
 class SignUpScreen extends StatefulWidget {
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -23,7 +22,8 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
   final TextEditingController _lastName = new TextEditingController();
   final TextEditingController _email = new TextEditingController();
   final TextEditingController _password = new TextEditingController();
-  TextEditingController textController = TextEditingController();
+  final FocusNode _focus = new FocusNode();
+
   AnimationController _controller;
   Animation<double> _fabScale;
 
@@ -40,13 +40,14 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
-      textController.addListener(() {
+    _focus.addListener(_onFocusChange);
+    _password.addListener(() {
       setState(() {
-        eightChars = textController.text.length >= 8;
-        number = textController.text.contains(RegExp(r'\d'), 0);
-        upperCaseChar = textController.text.contains(new RegExp(r'[A-Z]'), 0);
-        specialChar = textController.text.isNotEmpty &&
-            !textController.text.contains(RegExp(r'^[\w&.-]+$'), 0);
+        eightChars = _password.text.length >= 8;
+        number = _password.text.contains(RegExp(r'\d'), 0);
+        upperCaseChar = _password.text.contains(new RegExp(r'[A-Z]'), 0);
+        specialChar = _password.text.isNotEmpty &&
+            !_password.text.contains(RegExp(r'^[\w&.-]+$'), 0);
       });
 
       if (_allValid()) {
@@ -69,20 +70,14 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
     });  
   }
 
+  void _onFocusChange(){
+    debugPrint("Focus: "+_focus.hasFocus.toString());
+  }
+
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'hero',
-      child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 60.0,
-          child: ClipOval(
-            child: Image.asset(
-              'assets/images/default.png',
-              fit: BoxFit.cover,
-              width: 120.0,
-              height: 120.0,
-            ),
-          )),
+      child: headerImage,
     );
     /*
     final code = TextFormField(
@@ -163,8 +158,9 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
 
     final password = TextFormField(
       autofocus: false,
+      focusNode: _focus,
       obscureText: true,
-      controller: textController,
+      controller: _password,
       validator: Validator.validatePassword,
       decoration: InputDecoration(
         prefixIcon: Padding(
@@ -190,13 +186,13 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
               firstName: _firstName.text,
               lastName: _lastName.text,
               email: _email.text,
-              password: textController.text,
+              password: _password.text,
               code: _code.text,
               context: context);
         },   
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
-        child: Text('SIGN UP', style: TextStyle(color: Colors.white)),
+        child: Text('SIGN UP'),
       ),
     );
 
@@ -224,7 +220,6 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       logo,
-                      SizedBox(height: 48.0),
                       /*code,
                       SizedBox(height: 24.0),*/
                       firstName,
@@ -234,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
                       email,
                       SizedBox(height: 24.0),
                       password,
-                      Padding(padding: const EdgeInsets.all(4.0), child: _validationStack()), 
+                      (_focus.hasFocus)?Padding(padding: const EdgeInsets.only(top:4), child: _validationStack()):Container(),
                       SizedBox(height: 12.0),
                       signUpButton,
                       signInLabel
@@ -303,7 +298,7 @@ class _SignUpScreenState extends State<SignUpScreen> with TickerProviderStateMix
         }
         });*/
        await Auth.signUp(email, password).then((uID) {
-          Auth.addUserSettingsDB(new User(
+         Auth.addUserSettingsDB(new User(
             userId: uID,
             email: email,
             firstName: firstName,

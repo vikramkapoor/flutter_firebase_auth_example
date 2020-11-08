@@ -2,11 +2,10 @@ import 'dart:async';
 //import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_firebase_auth_example/models/user.dart';
-import 'package:flutter_firebase_auth_example/models/settings.dart';
+import 'package:flutter_firebase_auth_brainframe/models/user.dart';
+import 'package:flutter_firebase_auth_brainframe/models/settings.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:safeho/Customer.dart';
 
 enum authProblems { UserNotFound, PasswordNotValid, NetworkError, UnknownError }
 
@@ -40,38 +39,6 @@ class Auth {
             .updateData(user.toJson());
   }
 
-
-  static void addCustomerSettingsDB(Customer customer) async {
-    checkCustomerExist(customer.customerId).then((value) {
-      if (!value) {
-        print("customer ${customer.firstName} ${customer.email} added");
-        Firestore.instance
-            .document("Customers/${customer.customerId}")
-            .setData(customer.toJson());
-        _addSettings(new Settings(
-          settingsId: customer.customerId,
-        ));
-      } else {
-        print("user ${customer.firstName} ${customer.email} exists");
-      }
-    });
-  }
-
-  static Future<bool> checkCustomerExist(String customerId) async {
-    bool exists = false;
-    try {
-      await Firestore.instance.document("customer/$customerId").get().then((doc) {
-        if (doc.exists)
-          exists = true;
-        else
-          exists = false;
-      });
-      return exists;
-    } catch (e) {
-      return false;
-    }
-  }
-
   static Future<bool> checkUserExist(String userId) async {
     bool exists = false;
     try {
@@ -96,19 +63,6 @@ class Auth {
   static Future<String> signIn(String email, String password) async {
     FirebaseUser user = (await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password));
-    return user.uid;
-  }
-
-  static Future<String> signInWithFacebok(String accessToken) async {
-    
- ///assuming sucess in FacebookLoginStatus.loggedIn
-/// we use FacebookAuthProvider class to get a credential from accessToken
-/// this will return an AuthCredential object that we will use to auth in firebase
- AuthCredential credential= FacebookAuthProvider.getCredential(accessToken: accessToken);
-
-// this line do auth in firebase with your facebook credential.
-FirebaseUser user = await FirebaseAuth.instance.signInWithCredential(credential);
-
     return user.uid;
   }
 

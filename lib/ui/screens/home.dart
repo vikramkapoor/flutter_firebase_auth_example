@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_auth_example/models/state.dart';
-import 'package:flutter_firebase_auth_example/util/state_widget.dart';
-import 'package:flutter_firebase_auth_example/ui/screens/sign_in.dart';
-import 'package:flutter_firebase_auth_example/ui/widgets/loading.dart';
+import 'package:flutter_firebase_auth_brainframe/models/state.dart';
+import 'package:flutter_firebase_auth_brainframe/util/state_widget.dart';
+import 'package:flutter_firebase_auth_brainframe/ui/screens/sign_in.dart';
+import 'package:flutter_firebase_auth_brainframe/ui/widgets/loading.dart';
 
 class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
@@ -31,17 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
       final logo = Hero(
         tag: 'hero',
-        child: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            radius: 60.0,
-            child: ClipOval(
-              child: Image.asset(
-                'assets/images/default.png',
-                fit: BoxFit.cover,
-                width: 120.0,
-                height: 120.0,
-              ),
-            )),
+        child: headerImage,
       );
 
       final signOutButton = Padding(

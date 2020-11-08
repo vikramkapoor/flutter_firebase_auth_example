@@ -51,6 +51,50 @@
       },
       "oauth_client": [
         {
+          "client_id": "995372369195-ft0p70g5f0ttemgq7l1bqmnd885tg2ob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rakshak.safeho",
+            "certificate_hash": "bbbbc27887ac4c2b41706abf10ecf67a278418dd"
+          }
+        },
+        {
+          "client_id": "995372369195-ui9tsr5bks3p69f2b7nkp5hl9m5u55mm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoWsIGkjhtZrE6BjfrG9kPH8wrKc8-Y8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "995372369195-ui9tsr5bks3p69f2b7nkp5hl9m5u55mm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "995372369195-qbup190k22l6g626g788ameed1goev3u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rakshak.safeho"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995372369195:android:90788b0c1fdeec0601f16e",
+        "android_client_info": {
+          "package_name": "com.viniot.firebase_mlkit_language_example"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "995372369195-ui9tsr5bks3p69f2b7nkp5hl9m5u55mm.apps.googleusercontent.com",
           "client_type": 3
         }
